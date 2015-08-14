@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using DAL;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,11 @@ namespace Services
     {
         public void AddRange(IEnumerable<Transaction> transactions)
         {
-            
+            using (TransactionsDBContext context = new TransactionsDBContext())
+            {
+                context.Transactions.AddRange(transactions);
+                context.SaveChanges();
+            }
         }
     }
 }

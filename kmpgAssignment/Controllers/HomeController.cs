@@ -22,18 +22,13 @@ namespace kmpgAssignment.Controllers
             return View();
         }
 
-        public ActionResult Upload()
+        public ActionResult Upload(HttpPostedFileBase file = null)
         {
-            return View();
-        }
-
-        public ActionResult Upload(HttpPostedFileBase file)
-        {
-            if (file.ContentLength > 0)
+            if (file != null && file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName) + new Random().Next().ToString();
                 
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
                 file.SaveAs(path);
                 
                 string[] lines = System.IO.File.ReadAllLines(path);
@@ -45,7 +40,6 @@ namespace kmpgAssignment.Controllers
 
             }
             
-
             return View();
         }
     }

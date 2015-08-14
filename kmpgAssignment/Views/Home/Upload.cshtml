@@ -1,7 +1,19 @@
-﻿<form action="" method="post" enctype="multipart/form-data">
+﻿@model Model.ParseResult
+
+<form action="" method="post" enctype="multipart/form-data">
 
     <label for="file">Filename:</label>
     <input type="file" name="file" id="file" />
 
     <input type="submit" />
 </form>
+
+@if (Model != null)
+{
+    <h3>Parsed lines:</h3>
+    @Html.DisplayFor(model => model.ValidLinesNumber)
+
+    <h3>Ignored lines:</h3>
+    @Html.DisplayFor(model => model.IgnoredLinesNumber)
+}
+
